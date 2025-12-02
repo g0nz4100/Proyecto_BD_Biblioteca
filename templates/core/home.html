@@ -4,6 +4,9 @@
 {% block title %}{{ titulo }}{% endblock %}
 
 {% block content %}
+<!-- CSS específico de la página -->
+<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+
 <!-- Hero Section -->
 <section class="hero-section bg-primary text-white py-5">
     <div class="container">
@@ -26,8 +29,53 @@
                     </button>
                 </div>
             </div>
-            <div class="col-lg-6 text-center">
-                <i class="fas fa-book-open" style="font-size: 10rem; opacity: 0.3;"></i>
+            
+            <!-- Carousel -->
+            <div class="col-lg-6">
+                <div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="background-image: url('https://picsum.photos/1200/500?random=1')">
+                            <div class="carousel-caption">
+                                <h3>Biblioteca Moderna</h3>
+                                <p>Espacios diseñados para el aprendizaje y la investigación</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="background-image: url('https://picsum.photos/1200/500?random=2')">
+                            <div class="carousel-caption">
+                                <h3>Recursos Digitales</h3>
+                                <p>Acceso 24/7 a libros electrónicos y bases de datos</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="background-image: url('https://picsum.photos/1200/500?random=3')">
+                            <div class="carousel-caption">
+                                <h3>Salas de Estudio</h3>
+                                <p>Ambientes cómodos para estudio individual y grupal</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="background-image: url('https://picsum.photos/1200/500?random=4')">
+                            <div class="carousel-caption">
+                                <h3>Comunidad Estudiantil</h3>
+                                <p>Conectando estudiantes con el conocimiento</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -126,4 +174,7 @@
         </div>
     </div>
 </section>
+
+<!-- JavaScript específico de la página -->
+<script src="{% static 'js/pages/home.js' %}"></script>
 {% endblock %}
