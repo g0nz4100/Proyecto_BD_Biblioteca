@@ -1,0 +1,156 @@
+{# MODAL: AGREGAR ADMINISTRADOR #}
+<div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addAdminModalLabel">
+                    <i class="fas fa-user-shield me-2"></i>
+                    Agregar Nuevo Administrador
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addAdminForm">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="admin_nombres" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-primary"></i>Nombres *
+                            </label>
+                            <input type="text" class="form-control" id="admin_nombres" name="nombres" 
+                                   placeholder="Ej: Juan Carlos" 
+                                   pattern="[A-Za-zÁ-úa-ú\s]{2,50}" 
+                                   title="Solo letras y espacios, mínimo 2 caracteres" 
+                                   required>
+                            <div class="form-text">Ingrese sus nombres completos</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_paterno" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-primary"></i>Apellido Paterno *
+                            </label>
+                            <input type="text" class="form-control" id="admin_paterno" name="paterno" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_materno" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-primary"></i>Apellido Materno
+                            </label>
+                            <input type="text" class="form-control" id="admin_materno" name="materno">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_ci" class="form-label fw-bold">
+                                <i class="fas fa-id-card me-2 text-primary"></i>Cédula de Identidad *
+                            </label>
+                            <input type="text" class="form-control" id="admin_ci" name="ci" 
+                                   placeholder="Ej: 12345678" 
+                                   pattern="[0-9]{6,15}" 
+                                   title="Solo números, entre 6 y 15 dígitos" 
+                                   required>
+                            <div class="form-text">Ingrese su cédula sin puntos ni guiones</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_telefono" class="form-label fw-bold">
+                                <i class="fas fa-phone me-2 text-primary"></i>Teléfono
+                            </label>
+                            <input type="tel" class="form-control" id="admin_telefono" name="telefono">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_sexo" class="form-label fw-bold">
+                                <i class="fas fa-venus-mars me-2 text-primary"></i>Sexo *
+                            </label>
+                            <select class="form-select" id="admin_sexo" name="id_sexo" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="admin_email" class="form-label fw-bold">
+                                <i class="fas fa-envelope me-2 text-primary"></i>Email *
+                            </label>
+                            <input type="email" class="form-control" id="admin_email" name="email" 
+                                   placeholder="admin@biblioteca.edu.bo" 
+                                   title="Ingrese un email válido" 
+                                   required>
+                            <div class="form-text">Correo electrónico para notificaciones del sistema</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="admin_direccion" class="form-label fw-bold">
+                                <i class="fas fa-map-marker-alt me-2 text-primary"></i>Dirección
+                            </label>
+                            <textarea class="form-control" id="admin_direccion" name="direccion" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_cargo" class="form-label fw-bold">
+                                <i class="fas fa-briefcase me-2 text-primary"></i>Cargo *
+                            </label>
+                            <select class="form-select" id="admin_cargo" name="id_cargo" required>
+                                <option value="">Cargando...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_turno" class="form-label fw-bold">
+                                <i class="fas fa-clock me-2 text-primary"></i>Turno *
+                            </label>
+                            <select class="form-select" id="admin_turno" name="id_turno" required>
+                                <option value="">Cargando...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_fecha_contratacion" class="form-label fw-bold">
+                                <i class="fas fa-calendar me-2 text-primary"></i>Fecha de Contratación *
+                            </label>
+                            <input type="date" class="form-control" id="admin_fecha_contratacion" name="fecha_contratacion" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_fecha_nacimiento" class="form-label fw-bold">
+                                <i class="fas fa-birthday-cake me-2 text-primary"></i>Fecha de Nacimiento
+                            </label>
+                            <input type="date" class="form-control" id="admin_fecha_nacimiento" name="fecha_nacimiento">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_username" class="form-label fw-bold">
+                                <i class="fas fa-at me-2 text-primary"></i>Nombre de Usuario *
+                            </label>
+                            <input type="text" class="form-control" id="admin_username" name="username" 
+                                   placeholder="usuario_admin" 
+                                   pattern="[a-zA-Z0-9_]{4,30}" 
+                                   title="Solo letras, números y guiones bajos, 4-30 caracteres" 
+                                   required>
+                            <div class="form-text">Usuario único para acceder al sistema (4-30 caracteres)</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="admin_password" class="form-label fw-bold">
+                                <i class="fas fa-lock me-2 text-primary"></i>Contraseña Temporal *
+                            </label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="admin_password" name="password" 
+                                       placeholder="Mínimo 8 caracteres" 
+                                       minlength="8" 
+                                       title="Mínimo 8 caracteres con letras y números" 
+                                       required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('admin_password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-text">Debe cambiarla en el primer acceso (mínimo 8 caracteres)</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Nota:</strong> Se registrará en las tablas persona, usuario y empleado de la base de datos.
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" onclick="confirmAdminCreation()">
+                    <i class="fas fa-save me-2"></i>Crear Administrador
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

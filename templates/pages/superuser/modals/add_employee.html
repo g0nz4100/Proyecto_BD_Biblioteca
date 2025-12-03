@@ -1,0 +1,208 @@
+{# MODAL: AGREGAR EMPLEADO #}
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="addEmployeeModalLabel">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Agregar Nuevo Empleado
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addEmployeeForm">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="emp_nombres" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-success"></i>Nombres *
+                            </label>
+                            <input type="text" class="form-control" id="emp_nombres" name="nombres" 
+                                   placeholder="Ej: María Elena" 
+                                   pattern="[A-Za-zÁ-úa-ú\s]{2,50}" 
+                                   title="Solo letras y espacios, mínimo 2 caracteres" required>
+                            <div class="form-text">Ingrese sus nombres completos</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_paterno" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-success"></i>Apellido Paterno *
+                            </label>
+                            <input type="text" class="form-control" id="emp_paterno" name="paterno" 
+                                   placeholder="Ej: González" 
+                                   pattern="[A-Za-zÁ-úa-ú\s]{2,50}" 
+                                   title="Solo letras y espacios" required>
+                            <div class="form-text">Apellido paterno obligatorio</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_materno" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-success"></i>Apellido Materno
+                            </label>
+                            <input type="text" class="form-control" id="emp_materno" name="materno" 
+                                   placeholder="Ej: López (opcional)" 
+                                   pattern="[A-Za-zÁ-úa-ú\s]{0,50}">
+                            <div class="form-text">Apellido materno (opcional)</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_sexo" class="form-label fw-bold">
+                                <i class="fas fa-venus-mars me-2 text-success"></i>Sexo *
+                            </label>
+                            <select class="form-select" id="emp_sexo" name="id_sexo" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="M">Masculino</option>
+                                <option value="F">Femenino</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_ci" class="form-label fw-bold">
+                                <i class="fas fa-id-card me-2 text-success"></i>Cédula de Identidad *
+                            </label>
+                            <input type="text" class="form-control" id="emp_ci" name="ci" 
+                                   placeholder="Ej: 12345678" 
+                                   pattern="[0-9]{6,15}" 
+                                   title="Solo números, entre 6 y 15 dígitos" required>
+                            <div class="form-text">Ingrese su cédula sin puntos ni guiones</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_cargo" class="form-label fw-bold">
+                                <i class="fas fa-briefcase me-2 text-success"></i>Cargo *
+                            </label>
+                            <select class="form-select" id="emp_cargo" name="id_cargo" required>
+                                <option value="">Cargando...</option>
+                            </select>
+                            <div class="form-text">Cargo que desempeñará en la biblioteca</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_turno" class="form-label fw-bold">
+                                <i class="fas fa-clock me-2 text-success"></i>Turno *
+                            </label>
+                            <select class="form-select" id="emp_turno" name="id_turno" required>
+                                <option value="">Cargando...</option>
+                            </select>
+                            <div class="form-text">Turno de trabajo asignado</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_telefono" class="form-label fw-bold">
+                                <i class="fas fa-phone me-2 text-success"></i>Teléfono
+                            </label>
+                            <input type="tel" class="form-control" id="emp_telefono" name="telefono" 
+                                   placeholder="Ej: 70123456 o 22123456" 
+                                   pattern="[0-9]{7,15}" 
+                                   title="Solo números, entre 7 y 15 dígitos">
+                            <div class="form-text">Número de teléfono celular o fijo (opcional)</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_fecha_contratacion" class="form-label fw-bold">
+                                <i class="fas fa-calendar me-2 text-success"></i>Fecha de Contratación *
+                            </label>
+                            <input type="date" class="form-control" id="emp_fecha_contratacion" name="fecha_contratacion" required>
+                            <div class="form-text">Fecha de inicio de labores</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_fecha_nacimiento" class="form-label fw-bold">
+                                <i class="fas fa-birthday-cake me-2 text-success"></i>Fecha de Nacimiento
+                            </label>
+                            <input type="date" class="form-control" id="emp_fecha_nacimiento" name="fecha_nacimiento">
+                            <div class="form-text">Fecha de nacimiento (opcional)</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="emp_direccion" class="form-label fw-bold">
+                                <i class="fas fa-map-marker-alt me-2 text-success"></i>Dirección
+                            </label>
+                            <textarea class="form-control" id="emp_direccion" name="direccion" rows="2" 
+                                      placeholder="Dirección completa (opcional)"></textarea>
+                            <div class="form-text">Dirección de domicilio (opcional)</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="emp_email" class="form-label fw-bold">
+                                <i class="fas fa-envelope me-2 text-success"></i>Email *
+                            </label>
+                            <input type="email" class="form-control" id="emp_email" name="email" 
+                                   placeholder="empleado@biblioteca.edu.bo" 
+                                   title="Ingrese un email válido" required>
+                            <div class="form-text">Correo electrónico para notificaciones del sistema</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_username" class="form-label fw-bold">
+                                <i class="fas fa-at me-2 text-success"></i>Nombre de Usuario *
+                            </label>
+                            <input type="text" class="form-control" id="emp_username" name="username" 
+                                   placeholder="empleado_biblioteca" 
+                                   pattern="[a-zA-Z0-9_]{4,30}" 
+                                   title="Solo letras, números y guiones bajos, 4-30 caracteres" required>
+                            <div class="form-text">Usuario único para acceder al sistema (4-30 caracteres)</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="emp_password" class="form-label fw-bold">
+                                <i class="fas fa-lock me-2 text-success"></i>Contraseña Temporal *
+                            </label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="emp_password" name="password" 
+                                       placeholder="Mínimo 8 caracteres" 
+                                       minlength="8" 
+                                       title="Mínimo 8 caracteres con letras y números" required>
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('emp_password')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-text">Debe cambiarla en el primer acceso (mínimo 8 caracteres)</div>
+                        </div>
+                        <div class="col-12">
+                            <label for="emp_permisos" class="form-label fw-bold">
+                                <i class="fas fa-key me-2 text-success"></i>Permisos del Sistema
+                            </label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="perm_usuarios" name="permisos" value="gestionar_usuarios">
+                                        <label class="form-check-label" for="perm_usuarios">
+                                            <i class="fas fa-users me-2"></i>Gestionar Usuarios
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="perm_libros" name="permisos" value="gestionar_libros">
+                                        <label class="form-check-label" for="perm_libros">
+                                            <i class="fas fa-book me-2"></i>Gestionar Libros
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="perm_prestamos" name="permisos" value="gestionar_prestamos" checked>
+                                        <label class="form-check-label" for="perm_prestamos">
+                                            <i class="fas fa-handshake me-2"></i>Gestionar Préstamos
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="perm_reportes" name="permisos" value="generar_reportes">
+                                        <label class="form-check-label" for="perm_reportes">
+                                            <i class="fas fa-chart-bar me-2"></i>Generar Reportes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="alert alert-success">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Empleado:</strong> Se registrará en persona y empleado. Tendrá acceso como staff (no superusuario).
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-success" onclick="confirmEmployeeCreation()">
+                    <i class="fas fa-save me-2"></i>Crear Empleado
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

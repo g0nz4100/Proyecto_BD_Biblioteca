@@ -1,0 +1,97 @@
+{# TEMPLATE: LOGIN - Formulario de inicio de sesión #}
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+{# ========== META INFORMACIÓN ========== #}
+{% block title %}Iniciar Sesión - Biblioteca Universitaria{% endblock %}
+
+{# ========== CONTENIDO PRINCIPAL ========== #}
+{% block content %}
+
+{# ========== SECCIÓN HERO ========== #}
+<section class="hero-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 text-center text-white">
+                <h1 class="display-5 fw-bold mb-3">
+                    <i class="fas fa-sign-in-alt me-3"></i>Iniciar Sesión
+                </h1>
+                <p class="lead mb-0">
+                    Accede a tu cuenta para gestionar el sistema de biblioteca
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ========== FORMULARIO DE LOGIN ========== #}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h4 class="mb-0">
+                            <i class="fas fa-user-shield me-2"></i>
+                            Acceso al Sistema
+                        </h4>
+                    </div>
+                    
+                    <div class="card-body p-5">
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <div class="mb-4">
+                                <label for="username" class="form-label fw-bold">
+                                    <i class="fas fa-user me-2 text-primary"></i>Usuario
+                                </label>
+                                <input type="text" class="form-control form-control-lg" id="username" name="username" required>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="password" class="form-label fw-bold">
+                                    <i class="fas fa-lock me-2 text-primary"></i>Contraseña
+                                </label>
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                            </div>
+                            
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                                </button>
+                            </div>
+                            
+                            <div class="text-center">
+                                <small class="text-muted">
+                                    ¿No tienes cuenta? 
+                                    <a href="{% url 'core:pre_registro' %}" class="text-decoration-none">
+                                        Regístrate aquí
+                                    </a>
+                                </small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                {# Información de usuarios de prueba #}
+                <div class="card mt-4 border-info">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>Usuarios de Prueba
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <small>
+                            <strong>Superusuario:</strong> admin / admin123<br>
+                            <strong>Empleado:</strong> empleado / emp123<br>
+                            <em>Nota: Estos son usuarios de prueba para desarrollo</em>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,497 @@
+/* ==========================================
+   CSS DASHBOARD SUPERUSUARIO
+   Archivo: dashboard.css
+   Descripción: Estilos específicos para el dashboard del superusuario
+   ========================================== */
+
+/* ==========================================
+   VARIABLES ESPECÍFICAS DEL SUPERUSUARIO
+   ========================================== */
+:root {
+    --superuser-primary: #6f42c1;      /* Púrpura para superusuario */
+    --superuser-secondary: #495057;     /* Gris oscuro */
+    --superuser-accent: #fd7e14;       /* Naranja de acento */
+    --superuser-success: #198754;      /* Verde */
+    --superuser-warning: #ffc107;      /* Amarillo */
+    --superuser-danger: #dc3545;       /* Rojo */
+    --superuser-info: #0dcaf0;         /* Cian */
+    --superuser-dark: #212529;         /* Negro */
+    --superuser-light: #f8f9fa;        /* Gris claro */
+    
+    /* Gradientes específicos */
+    --gradient-superuser: linear-gradient(135deg, var(--superuser-primary) 0%, #8b5cf6 100%);
+    --gradient-dark: linear-gradient(135deg, var(--superuser-dark) 0%, var(--superuser-secondary) 100%);
+    --gradient-gold: linear-gradient(135deg, #ffd700 0%, var(--superuser-accent) 100%);
+}
+
+/* ==========================================
+   HEADER DEL DASHBOARD
+   ========================================== */
+.dashboard-header {
+    background: var(--gradient-superuser);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(111, 66, 193, 0.3);
+}
+
+.dashboard-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="crown-pattern" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M25 10 L35 25 L25 40 L15 25 Z" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23crown-pattern)"/></svg>');
+    opacity: 0.1;
+}
+
+.avatar-superuser {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--superuser-dark);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    position: relative;
+    animation: pulse-crown 2s infinite;
+}
+
+@keyframes pulse-crown {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+    }
+}
+
+/* ==========================================
+   TARJETAS DE ESTADÍSTICAS
+   ========================================== */
+.stat-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-superuser);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-icon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.stat-card:hover .stat-icon::before {
+    opacity: 1;
+    animation: shine 0.6s ease;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* ==========================================
+   TARJETAS DE ACCIONES
+   ========================================== */
+.action-card {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.action-card .card-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card .card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.6s ease;
+}
+
+.action-card:hover .card-header::before {
+    left: 100%;
+}
+
+/* ==========================================
+   BOTONES PERSONALIZADOS
+   ========================================== */
+.btn-outline-primary:hover,
+.btn-outline-success:hover,
+.btn-outline-warning:hover,
+.btn-outline-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   FEED DE ACTIVIDAD
+   ========================================== */
+.activity-feed {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item:hover {
+    background-color: rgba(111, 66, 193, 0.05);
+    border-radius: 8px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.activity-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: white;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
+}
+
+.activity-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-content p {
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+}
+
+.activity-content small {
+    font-size: 0.75rem;
+}
+
+/* ==========================================
+   GRÁFICOS Y CANVAS
+   ========================================== */
+#usersChart {
+    max-height: 300px;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+}
+
+/* ==========================================
+   MODALES PERSONALIZADOS
+   ========================================== */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    border-radius: 15px 15px 0 0;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+    pointer-events: none;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 15px 15px;
+}
+
+/* ==========================================
+   FORMULARIOS EN MODALES
+   ========================================== */
+.form-control:focus {
+    border-color: var(--superuser-primary);
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--superuser-primary);
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: var(--superuser-primary);
+    border-color: var(--superuser-primary);
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+}
+
+/* ==========================================
+   PESTAÑAS DE CONFIGURACIÓN
+   ========================================== */
+.nav-tabs .nav-link {
+    border: none;
+    color: var(--superuser-secondary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-tabs .nav-link:hover {
+    border: none;
+    color: var(--superuser-primary);
+    background-color: rgba(111, 66, 193, 0.1);
+}
+
+.nav-tabs .nav-link.active {
+    border: none;
+    color: var(--superuser-primary);
+    background-color: rgba(111, 66, 193, 0.1);
+    position: relative;
+}
+
+.nav-tabs .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-superuser);
+    border-radius: 3px 3px 0 0;
+}
+
+/* ==========================================
+   BARRAS DE PROGRESO
+   ========================================== */
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* ==========================================
+   BADGES Y ETIQUETAS
+   ========================================== */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+    border-radius: 8px;
+}
+
+/* ==========================================
+   SCROLLBAR PERSONALIZADO
+   ========================================== */
+.activity-feed::-webkit-scrollbar {
+    width: 6px;
+}
+
+.activity-feed::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.activity-feed::-webkit-scrollbar-thumb {
+    background: var(--superuser-primary);
+    border-radius: 3px;
+}
+
+.activity-feed::-webkit-scrollbar-thumb:hover {
+    background: #5a2d91;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 768px) {
+    .dashboard-header {
+        text-align: center;
+    }
+    
+    .dashboard-header .col-lg-4 {
+        margin-top: 1rem;
+    }
+    
+    .stat-card {
+        margin-bottom: 1rem;
+    }
+    
+    .action-card {
+        margin-bottom: 1rem;
+    }
+    
+    .modal-dialog {
+        margin: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .avatar-superuser {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.25rem;
+    }
+}
+
+/* ==========================================
+   ANIMACIONES ADICIONALES
+   ========================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+/* ==========================================
+   ESTADOS DE CARGA
+   ========================================== */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid var(--superuser-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

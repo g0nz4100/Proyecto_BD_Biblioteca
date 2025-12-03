@@ -1,0 +1,317 @@
+{# MODAL: CONFIGURACIÓN DEL SISTEMA #}
+<div class="modal fade" id="systemConfigModal" tabindex="-1" aria-labelledby="systemConfigModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="systemConfigModalLabel">
+                    <i class="fas fa-sliders-h me-2"></i>
+                    Configuración General del Sistema
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="systemConfigForm">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="alert alert-success">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Configuración Global:</strong> Ajuste los parámetros generales del sistema de biblioteca.
+                            </div>
+                        </div>
+                        
+                        {# Información Básica #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-building me-2"></i>Información de la Institución
+                            </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="nombre_sistema" class="form-label fw-bold">
+                                <i class="fas fa-university me-2 text-success"></i>Nombre del Sistema
+                            </label>
+                            <input type="text" class="form-control" id="nombre_sistema" name="nombre_sistema" 
+                                   value="Biblioteca Universitaria" required>
+                            <div class="form-text">Nombre que aparecerá en el sistema</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email_admin" class="form-label fw-bold">
+                                <i class="fas fa-envelope me-2 text-success"></i>Email del Administrador
+                            </label>
+                            <input type="email" class="form-control" id="email_admin" name="email_admin" 
+                                   value="admin@biblioteca.edu.bo" required>
+                            <div class="form-text">Email principal para notificaciones</div>
+                        </div>
+                        
+                        {# Configuración Regional #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-globe me-2"></i>Configuración Regional
+                            </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="timezone" class="form-label fw-bold">
+                                <i class="fas fa-clock me-2 text-success"></i>Zona Horaria
+                            </label>
+                            <select class="form-select" id="timezone" name="timezone" required>
+                                <option value="America/La_Paz" selected>América/La Paz (BOT)</option>
+                                <option value="America/Lima">América/Lima (PET)</option>
+                                <option value="America/Bogota">América/Bogotá (COT)</option>
+                                <option value="America/Santiago">América/Santiago (CLT)</option>
+                                <option value="UTC">UTC (Tiempo Universal)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="idioma" class="form-label fw-bold">
+                                <i class="fas fa-language me-2 text-success"></i>Idioma del Sistema
+                            </label>
+                            <select class="form-select" id="idioma" name="idioma" required>
+                                <option value="es" selected>Español</option>
+                                <option value="en">English</option>
+                                <option value="pt">Português</option>
+                                <option value="qu">Quechua</option>
+                            </select>
+                        </div>
+                        
+                        {# Configuraciones de Acceso #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-users me-2"></i>Control de Acceso
+                            </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="registro_publico" 
+                                       name="registro_publico" checked>
+                                <label class="form-check-label" for="registro_publico">
+                                    <i class="fas fa-user-plus me-2"></i>Permitir Pre-registro Público
+                                </label>
+                            </div>
+                            <div class="form-text">Los usuarios pueden pre-registrarse sin invitación</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="mantenimiento" 
+                                       name="mantenimiento">
+                                <label class="form-check-label" for="mantenimiento">
+                                    <i class="fas fa-tools me-2"></i>Modo Mantenimiento
+                                </label>
+                            </div>
+                            <div class="form-text">Solo superusuarios pueden acceder</div>
+                        </div>
+                        
+                        {# Configuraciones de Notificaciones #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-bell me-2"></i>Notificaciones
+                            </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notificaciones_email" 
+                                       name="notificaciones_email" checked>
+                                <label class="form-check-label" for="notificaciones_email">
+                                    <i class="fas fa-envelope me-2"></i>Notificaciones por Email
+                                </label>
+                            </div>
+                            <div class="form-text">Enviar emails automáticos a usuarios</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="notificaciones_sms" 
+                                       name="notificaciones_sms">
+                                <label class="form-check-label" for="notificaciones_sms">
+                                    <i class="fas fa-sms me-2"></i>Notificaciones por SMS
+                                </label>
+                            </div>
+                            <div class="form-text">Enviar SMS para eventos importantes</div>
+                        </div>
+                        
+                        {# Configuraciones de Backup #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-database me-2"></i>Respaldo y Seguridad
+                            </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="backup_automatico" 
+                                       name="backup_automatico" checked>
+                                <label class="form-check-label" for="backup_automatico">
+                                    <i class="fas fa-download me-2"></i>Backup Automático
+                                </label>
+                            </div>
+                            <div class="form-text">Realizar backups automáticos diarios</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="logs_detallados" 
+                                       name="logs_detallados" checked>
+                                <label class="form-check-label" for="logs_detallados">
+                                    <i class="fas fa-file-alt me-2"></i>Logs Detallados
+                                </label>
+                            </div>
+                            <div class="form-text">Registrar todas las acciones del sistema</div>
+                        </div>
+                        
+                        {# Configuraciones de Préstamos #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-handshake me-2"></i>Configuración de Préstamos
+                            </h6>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dias_prestamo_estudiante" class="form-label fw-bold">
+                                <i class="fas fa-graduation-cap me-2 text-success"></i>Días - Estudiantes
+                            </label>
+                            <input type="number" class="form-control" id="dias_prestamo_estudiante" 
+                                   name="dias_prestamo_estudiante" value="7" min="1" max="30">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dias_prestamo_docente" class="form-label fw-bold">
+                                <i class="fas fa-chalkboard-teacher me-2 text-success"></i>Días - Docentes
+                            </label>
+                            <input type="number" class="form-control" id="dias_prestamo_docente" 
+                                   name="dias_prestamo_docente" value="15" min="1" max="60">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="max_libros_usuario" class="form-label fw-bold">
+                                <i class="fas fa-books me-2 text-success"></i>Máx. Libros por Usuario
+                            </label>
+                            <input type="number" class="form-control" id="max_libros_usuario" 
+                                   name="max_libros_usuario" value="3" min="1" max="10">
+                        </div>
+                        
+                        {# Configuraciones de Multas #}
+                        <div class="col-12">
+                            <h6 class="fw-bold text-success">
+                                <i class="fas fa-money-bill me-2"></i>Sistema de Multas
+                            </h6>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="multas_activas" 
+                                       name="multas_activas" checked>
+                                <label class="form-check-label" for="multas_activas">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>Activar Sistema de Multas
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="multa_por_dia" class="form-label fw-bold">
+                                <i class="fas fa-coins me-2 text-success"></i>Multa por Día (Bs.)
+                            </label>
+                            <input type="number" class="form-control" id="multa_por_dia" 
+                                   name="multa_por_dia" value="2" min="0" step="0.50">
+                        </div>
+                        
+                        {# Vista Previa de Configuración #}
+                        <div class="col-12">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-eye me-2"></i>Resumen de Configuración
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-2 small">
+                                        <div class="col-md-6">
+                                            <strong>Sistema:</strong> <span id="preview_sistema">Biblioteca Universitaria</span><br>
+                                            <strong>Zona Horaria:</strong> <span id="preview_timezone">América/La Paz</span><br>
+                                            <strong>Idioma:</strong> <span id="preview_idioma">Español</span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <strong>Pre-registro:</strong> <span id="preview_registro">Habilitado</span><br>
+                                            <strong>Mantenimiento:</strong> <span id="preview_mantenimiento">Deshabilitado</span><br>
+                                            <strong>Backup Auto:</strong> <span id="preview_backup">Habilitado</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-warning me-2" onclick="resetToDefaults()">
+                    <i class="fas fa-undo me-2"></i>Restaurar Predeterminados
+                </button>
+                <button type="button" class="btn btn-success" onclick="saveSystemConfig()">
+                    <i class="fas fa-save me-2"></i>Guardar Configuración
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Actualizar vista previa en tiempo real
+document.addEventListener('DOMContentLoaded', function() {
+    const inputs = document.querySelectorAll('#systemConfigForm input, #systemConfigForm select');
+    inputs.forEach(input => {
+        input.addEventListener('change', updateConfigPreview);
+        input.addEventListener('input', updateConfigPreview);
+    });
+    
+    updateConfigPreview();
+});
+
+function updateConfigPreview() {
+    document.getElementById('preview_sistema').textContent = 
+        document.getElementById('nombre_sistema').value;
+    
+    const timezoneSelect = document.getElementById('timezone');
+    document.getElementById('preview_timezone').textContent = 
+        timezoneSelect.options[timezoneSelect.selectedIndex].text;
+    
+    const idiomaSelect = document.getElementById('idioma');
+    document.getElementById('preview_idioma').textContent = 
+        idiomaSelect.options[idiomaSelect.selectedIndex].text;
+    
+    document.getElementById('preview_registro').textContent = 
+        document.getElementById('registro_publico').checked ? 'Habilitado' : 'Deshabilitado';
+    
+    document.getElementById('preview_mantenimiento').textContent = 
+        document.getElementById('mantenimiento').checked ? 'Habilitado' : 'Deshabilitado';
+    
+    document.getElementById('preview_backup').textContent = 
+        document.getElementById('backup_automatico').checked ? 'Habilitado' : 'Deshabilitado';
+}
+
+function resetToDefaults() {
+    Swal.fire({
+        title: '¿Restaurar configuración predeterminada?',
+        text: 'Se perderán todos los cambios actuales',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#ffc107',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, restaurar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Restaurar valores predeterminados
+            document.getElementById('nombre_sistema').value = 'Biblioteca Universitaria';
+            document.getElementById('email_admin').value = 'admin@biblioteca.edu.bo';
+            document.getElementById('timezone').value = 'America/La_Paz';
+            document.getElementById('idioma').value = 'es';
+            document.getElementById('registro_publico').checked = true;
+            document.getElementById('mantenimiento').checked = false;
+            document.getElementById('notificaciones_email').checked = true;
+            document.getElementById('backup_automatico').checked = true;
+            document.getElementById('logs_detallados').checked = true;
+            
+            updateConfigPreview();
+            
+            Swal.fire(
+                'Restaurado',
+                'Configuración restaurada a valores predeterminados',
+                'success'
+            );
+        }
+    });
+}
+</script>

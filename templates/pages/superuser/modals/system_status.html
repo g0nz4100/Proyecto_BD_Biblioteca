@@ -1,0 +1,217 @@
+{# MODAL: ESTADO DEL SISTEMA #}
+<div class="modal fade" id="systemStatusModal" tabindex="-1" aria-labelledby="systemStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="systemStatusModalLabel">
+                    <i class="fas fa-heartbeat me-2"></i>
+                    Estado del Sistema
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+                    {# Estado General #}
+                    <div class="col-12">
+                        <div class="card bg-success text-white">
+                            <div class="card-body text-center">
+                                <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                <h4 class="mb-2">Sistema Operativo</h4>
+                                <p class="mb-0">Todos los servicios funcionando correctamente</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# Métricas del Sistema #}
+                    <div class="col-md-6">
+                        <div class="card border-0">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-server me-2"></i>Servidor
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <small class="text-muted">CPU:</small>
+                                        <div class="progress mb-2" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 25%"></div>
+                                        </div>
+                                        <small>25%</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">RAM:</small>
+                                        <div class="progress mb-2" style="height: 8px;">
+                                            <div class="progress-bar bg-info" style="width: 60%"></div>
+                                        </div>
+                                        <small>60%</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Disco:</small>
+                                        <div class="progress mb-2" style="height: 8px;">
+                                            <div class="progress-bar bg-warning" style="width: 45%"></div>
+                                        </div>
+                                        <small>45%</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Red:</small>
+                                        <div class="progress mb-2" style="height: 8px;">
+                                            <div class="progress-bar bg-success" style="width: 15%"></div>
+                                        </div>
+                                        <small>15%</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# Base de Datos #}
+                    <div class="col-md-6">
+                        <div class="card border-0">
+                            <div class="card-header bg-info text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-database me-2"></i>Base de Datos
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Estado:</span>
+                                    <span class="badge bg-success">Conectado</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Conexiones:</span>
+                                    <span>12/100</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Tamaño:</span>
+                                    <span>2.4 GB</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span>Último Backup:</span>
+                                    <span class="text-success">Hoy 02:00</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>Consultas/seg:</span>
+                                    <span>45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# Servicios del Sistema #}
+                    <div class="col-12">
+                        <div class="card border-0">
+                            <div class="card-header bg-secondary text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-cogs me-2"></i>Servicios del Sistema
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>Servidor Web</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>Base de Datos</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>Email Service</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-warning me-2"></i>
+                                            <span>Backup Service</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>Cache Redis</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>File Storage</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>Security</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-circle text-success me-2"></i>
+                                            <span>Monitoring</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# Información del Sistema #}
+                    <div class="col-12">
+                        <div class="card border-0">
+                            <div class="card-header bg-dark text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-info-circle me-2"></i>Información del Sistema
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <strong>Versión del Sistema:</strong> v2.1.0
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Django:</strong> 5.2.8
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Python:</strong> 3.11.5
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>PostgreSQL:</strong> 15.4
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Tiempo de Actividad:</strong> 15 días, 8 horas
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Último Reinicio:</strong> 2024-01-15 14:30:00
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Usuarios Conectados:</strong> 23
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Sesiones Activas:</strong> 45
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Cerrar
+                </button>
+                <button type="button" class="btn btn-primary" onclick="refreshSystemStatus()">
+                    <i class="fas fa-sync me-2"></i>Actualizar
+                </button>
+                <button type="button" class="btn btn-warning" onclick="downloadSystemReport()">
+                    <i class="fas fa-download me-2"></i>Descargar Reporte
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
