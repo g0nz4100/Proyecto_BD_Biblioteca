@@ -41,15 +41,50 @@
                             <i class="fas fa-home me-1"></i>Inicio
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-book me-1"></i>Catálogo
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-calendar-alt me-1"></i>Reservas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-info-circle me-1"></i>Acerca de
+                        </a>
+                    </li>
                 </ul>
                 
-                <div class="d-flex">
-                    <button class="btn btn-outline-light me-2">
-                        <i class="fas fa-sign-in-alt me-1"></i>Iniciar Sesión
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-light btn-sm me-2" id="themeToggle" title="Cambiar tema">
+                        <i class="fas fa-moon me-1" id="themeIcon"></i>Tema
                     </button>
-                    <button class="btn btn-light">
-                        <i class="fas fa-user-plus me-1"></i>Registrarse
-                    </button>
+                    
+                    <div class="dropdown me-2">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-globe me-1"></i>ES
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-flag me-2"></i>Español</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-flag me-2"></i>English</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-flag me-2"></i>Português</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>Cuenta
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Registrarse</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-question-circle me-2"></i>Ayuda</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,5 +224,35 @@
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/components/navbar.js' %}"></script>
     <script src="{% static 'js/components/footer.js' %}"></script>
+    
+    <!-- Script para tema oscuro -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            
+            // Verificar tema guardado
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                body.setAttribute('data-bs-theme', 'dark');
+                themeIcon.className = 'fas fa-sun me-1';
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-bs-theme');
+                
+                if (currentTheme === 'dark') {
+                    body.setAttribute('data-bs-theme', 'light');
+                    themeIcon.className = 'fas fa-moon me-1';
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-bs-theme', 'dark');
+                    themeIcon.className = 'fas fa-sun me-1';
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
