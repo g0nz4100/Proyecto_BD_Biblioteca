@@ -3,12 +3,15 @@
 
 {% block title %}{{ titulo }}{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/home/styles.css' %}">
+{% endblock %}
+
 {% block content %}
-<!-- CSS específico de la página -->
-<link rel="stylesheet" href="{% static 'css/pages/home.css' %}">
+
 
 <!-- Hero Section -->
-<section class="hero-section bg-primary text-white py-5">
+<section class="hero-section text-white py-5">
     <div class="container">
         <div class="row align-items-center min-vh-50">
             <div class="col-lg-6">
@@ -24,9 +27,9 @@
                     <button class="btn btn-warning btn-lg">
                         <i class="fas fa-search me-2"></i>Explorar Catálogo
                     </button>
-                    <button class="btn btn-outline-light btn-lg">
+                    <a href="{% url 'core:pre_registro' %}" class="btn btn-outline-light btn-lg">
                         <i class="fas fa-user-plus me-2"></i>Registrarse
-                    </button>
+                    </a>
                 </div>
             </div>
             
@@ -175,6 +178,8 @@
     </div>
 </section>
 
-<!-- JavaScript específico de la página -->
-<script src="{% static 'js/pages/home.js' %}"></script>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/pages/home/main.js' %}"></script>
 {% endblock %}

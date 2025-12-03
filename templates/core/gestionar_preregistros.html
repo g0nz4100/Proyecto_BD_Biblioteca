@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Gestionar Pre-registros - Biblioteca{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-user-check me-2"></i>
+                        Gestionar Pre-registros Pendientes
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% if preregistros %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>CI</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Email</th>
+                                        <th>Tipo Usuario</th>
+                                        <th>Estado</th>
+                                        <th>Fecha Registro</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for pre in preregistros %}
+                                    <tr>
+                                        <td>{{ pre.ci }}</td>
+                                        <td>{{ pre.nombres }} {{ pre.paterno|default:"" }} {{ pre.materno|default:"" }}</td>
+                                        <td>{{ pre.email|default:"Sin email" }}</td>
+                                        <td>
+                                            <span class="badge bg-info">{{ pre.get_id_tipo_usuario_display }}</span>
+                                        </td>
+                                        <td>
+                                            {% if pre.estado == 'PENDIENTE' %}
+                                                <span class="badge bg-warning">{{ pre.get_estado_display }}</span>
+                                            {% elif pre.estado == 'ACTIVO' %}
+                                                <span class="badge bg-success">{{ pre.get_estado_display }}</span>
+                                            {% elif pre.estado == 'INACTIVO' %}
+                                                <span class="badge bg-secondary">{{ pre.get_estado_display }}</span>
+                                            {% elif pre.estado == 'RECHAZADO' %}
+                                                <span class="badge bg-danger">{{ pre.get_estado_display }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ pre.fecha_registro|date:"d/m/Y H:i" }}</td>
+                                        <td>
+                                            {% if pre.estado == 'PENDIENTE' %}
+                                                <button class="btn btn-sm btn-success me-1" onclick="aprobarPreregistro({{ pre.id }})">
+                                                    <i class="fas fa-check"></i> Aprobar
+                                                </button>
+                                                <button class="btn btn-sm btn-danger" onclick="rechazarPreregistro({{ pre.id }})">
+                                                    <i class="fas fa-times"></i> Rechazar
+                                                </button>
+                                            {% elif pre.estado == 'ACTIVO' %}
+                                                <button class="btn btn-sm btn-warning" onclick="bloquearUsuario({{ pre.id }})">
+                                                    <i class="fas fa-ban"></i> Bloquear
+                                                </button>
+                                            {% elif pre.estado == 'INACTIVO' %}
+                                                <button class="btn btn-sm btn-success" onclick="activarUsuario({{ pre.id }})">
+                                                    <i class="fas fa-unlock"></i> Activar
+                                                </button>
+                                            {% elif pre.estado == 'RECHAZADO' %}
+                                                <span class="text-muted">Sin acciones</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No hay pre-registros pendientes</h5>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript específico de la página -->
+<script src="{% static 'js/pages/gestionar_preregistros.js' %}"></script>
+{% csrf_token %}
+{% endblock %}

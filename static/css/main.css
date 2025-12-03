@@ -272,7 +272,7 @@ body {
     transform: translateX(5px);
 }
 
-.footer-social a {
+.social-icon {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -280,14 +280,17 @@ body {
     height: 40px;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
-    margin-right: 0.5rem;
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: none;
     transition: var(--transition);
+    font-size: 1rem;
 }
 
-.footer-social a:hover {
+.social-icon:hover {
     background-color: var(--warning-color);
-    color: var(--oxford-blue);
+    color: var(--oxford-blue) !important;
     transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
 }
 
 /* ==========================================

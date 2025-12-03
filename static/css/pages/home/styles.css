@@ -2,6 +2,11 @@
    HOME PAGE - CAROUSEL STYLES
    ========================================== */
 
+/* Hero Section - Mismo color que pre-registro */
+.hero-section {
+    background: linear-gradient(135deg, var(--oxford-blue) 0%, var(--oxford-blue-light) 100%) !important;
+}
+
 .hero-carousel {
     height: 500px;
     overflow: hidden;

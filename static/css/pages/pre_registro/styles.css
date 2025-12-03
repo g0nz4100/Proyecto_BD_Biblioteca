@@ -1,0 +1,153 @@
+/* ==========================================
+   PRE-REGISTRO PAGE STYLES
+   ========================================== */
+
+/* Cards de selección de tipo de usuario */
+.form-check-card {
+    margin-bottom: 0;
+}
+
+.card-radio {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-radio:hover {
+    border-color: #0d6efd;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+    transform: translateY(-2px);
+}
+
+.form-check-input:checked + .card-radio {
+    border-color: #0d6efd;
+    background: rgba(13, 110, 253, 0.05);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+}
+
+/* Secciones del formulario */
+.card-header {
+    border-bottom: none;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Campos de formulario */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.form-label {
+    margin-bottom: 0.75rem;
+    color: #495057;
+}
+
+.form-label i {
+    width: 20px;
+}
+
+/* Indicador de fortaleza de contraseña */
+.password-strength {
+    margin-top: 0.5rem;
+}
+
+.password-strength .progress {
+    height: 4px;
+    border-radius: 2px;
+}
+
+.password-strength small {
+    font-size: 0.75rem;
+}
+
+/* Botones */
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .col-md-4 {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Estados de validación */
+.is-valid {
+    border-color: #28a745;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.text-danger {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--oxford-blue) 0%, var(--oxford-blue-light) 100%) !important;
+}
+
+/* Campos ocultos */
+.campo-oculto {
+    display: none;
+}
+
+/* Transiciones suaves para mostrar/ocultar campos */
+#campo_modalidad, #campo_grado {
+    transition: all 0.3s ease;
+}
+
+#mensaje_academico {
+    padding: 1rem;
+    background: rgba(108, 117, 125, 0.1);
+    border-radius: 8px;
+    border: 1px dashed #6c757d;
+}

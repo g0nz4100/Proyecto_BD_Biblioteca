@@ -1,0 +1,382 @@
+{# TEMPLATE: PRE-REGISTRO - Formulario de pre-registro para usuarios de la biblioteca #}
+
+{% extends 'base/base.html' %}
+{% load static %}
+
+{# ========== META INFORMACIÓN ========== #}
+{% block title %}Pre-registro - Biblioteca Universitaria{% endblock %}
+
+{# ========== CSS ESPECÍFICO ========== #}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/pages/pre_registro/styles.css' %}">
+{% endblock %}
+
+{# ========== CONTENIDO PRINCIPAL ========== #}
+{% block content %}
+
+{# ========== SECCIÓN HERO ========== #}
+{# Sección de encabezado con título y descripción #}
+<section class="hero-section py-1">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center text-white">
+                <h1 class="display-5 fw-bold mb-1">
+                    <i class="fas fa-user-plus me-3"></i>Pre-registro
+                </h1>
+                <p class="lead mb-1">
+                    Completa tu pre-registro para acceder a todos los servicios de la biblioteca.
+                    Un empleado validará tu información antes de activar tu cuenta.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ========== FORMULARIO PRINCIPAL ========== #}
+{# Formulario de pre-registro con todas las secciones #}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h3 class="mb-0">
+                            <i class="fas fa-clipboard-list me-2"></i>
+                            Formulario de Pre-registro
+                        </h3>
+                    </div>
+                    
+                    <div class="card-body p-5">
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            {# ========== ERRORES GENERALES ========== #}
+                            {# Mostrar errores generales del formulario #}
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+                            
+                            {# ========== SECCIÓN 1: TIPO DE USUARIO ========== #}
+                            {# Selección del tipo de usuario: Estudiante, Docente, Invitado #}
+                            <div class="card mb-4">
+                                <div class="card-header bg-primary text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-users me-2"></i>
+                                        Tipo de Usuario
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    {# Radio buttons con iconos para cada tipo de usuario #}
+                                    <div class="row g-3">
+                                        {% for value, label in form.id_tipo_usuario.field.choices %}
+                                            <div class="col-md-4">
+                                                <div class="form-check form-check-card">
+                                                    <input class="form-check-input" type="radio" name="id_tipo_usuario" id="tipo_{{ value }}" value="{{ value }}" {% if form.id_tipo_usuario.value == value %}checked{% endif %} required>
+                                                    <label class="form-check-label card-radio" for="tipo_{{ value }}">
+                                                        <div class="text-center p-3">
+                                                            {% if value == 'U-01' %}
+                                                                <i class="fas fa-graduation-cap fa-2x text-primary mb-2"></i>
+                                                            {% elif value == 'U-02' %}
+                                                                <i class="fas fa-chalkboard-teacher fa-2x text-success mb-2"></i>
+                                                            {% elif value == 'U-04' %}
+                                                                <i class="fas fa-user-friends fa-2x text-warning mb-2"></i>
+                                                            {% endif %}
+                                                            <div class="fw-bold">{{ label }}</div>
+                                                            <small class="text-muted">
+                                                                {% if value == 'U-01' %}Estudiante universitario
+                                                                {% elif value == 'U-02' %}Profesor universitario
+                                                                {% elif value == 'U-04' %}Usuario externo
+                                                                {% endif %}
+                                                            </small>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    {% if form.id_tipo_usuario.errors %}
+                                        <div class="text-danger mt-2">{{ form.id_tipo_usuario.errors }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            {# ========== SECCIÓN 2: DATOS ACADÉMICOS ========== #}
+                            {# Modalidad de ingreso y grado académico (obligatorios para todos) #}
+                            <div class="card mb-4">
+                                <div class="card-header bg-success text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-graduation-cap me-2"></i>
+                                        Datos Académicos
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        {# Campo: Modalidad de Ingreso #}
+                                        {# Campo para modalidad de ingreso (PSA, CPU, etc.) #}
+                                        <div class="col-md-6">
+                                            <label for="{{ form.id_modalidad_ingreso.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-door-open me-2 text-primary"></i>
+                                                {{ form.id_modalidad_ingreso.label }} *
+                                            </label>
+                                            {{ form.id_modalidad_ingreso }}
+                                            {% if form.id_modalidad_ingreso.errors %}
+                                                <div class="text-danger mt-1">{{ form.id_modalidad_ingreso.errors }}</div>
+                                            {% endif %}
+
+                                        </div>
+
+                                        {# Campo: Grado Académico #}
+                                        {# Campo para grado académico (Licenciatura, Maestría, etc.) #}
+                                        <div class="col-md-6">
+                                            <label for="{{ form.id_grado_academico.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-medal me-2 text-primary"></i>
+                                                {{ form.id_grado_academico.label }} *
+                                            </label>
+                                            {{ form.id_grado_academico }}
+                                            {% if form.id_grado_academico.errors %}
+                                                <div class="text-danger mt-1">{{ form.id_grado_academico.errors }}</div>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# ========== SECCIÓN 3: DATOS PERSONALES ========== #}
+                            {# Información personal del usuario #}
+                            <div class="card mb-4">
+                                <div class="card-header bg-info text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-user me-2"></i>
+                                        Datos Personales
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    {# Subsección: Nombres y Apellidos #}
+                                    {# Nombres, apellido paterno y materno #}
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-4">
+                                            <label for="{{ form.nombres.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-user me-2 text-primary"></i>
+                                                {{ form.nombres.label }} *
+                                            </label>
+                                            {{ form.nombres }}
+                                            {% if form.nombres.errors %}
+                                                <div class="text-danger mt-1">{{ form.nombres.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="{{ form.paterno.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-user me-2 text-primary"></i>
+                                                {{ form.paterno.label }}
+                                            </label>
+                                            {{ form.paterno }}
+                                            {% if form.paterno.errors %}
+                                                <div class="text-danger mt-1">{{ form.paterno.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="{{ form.materno.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-user me-2 text-primary"></i>
+                                                {{ form.materno.label }}
+                                            </label>
+                                            {{ form.materno }}
+                                            {% if form.materno.errors %}
+                                                <div class="text-danger mt-1">{{ form.materno.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    {# Subsección: Identificación y Datos Básicos #}
+                                    {# Cédula de identidad, sexo y fecha de nacimiento #}
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-4">
+                                            <label for="{{ form.ci.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-id-card me-2 text-primary"></i>
+                                                {{ form.ci.label }} *
+                                            </label>
+                                            {{ form.ci }}
+                                            {% if form.ci.errors %}
+                                                <div class="text-danger mt-1">{{ form.ci.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="{{ form.id_sexo.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-venus-mars me-2 text-primary"></i>
+                                                {{ form.id_sexo.label }} *
+                                            </label>
+                                            {{ form.id_sexo }}
+                                            {% if form.id_sexo.errors %}
+                                                <div class="text-danger mt-1">{{ form.id_sexo.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="{{ form.fecha_nacimiento.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-calendar me-2 text-primary"></i>
+                                                {{ form.fecha_nacimiento.label }}
+                                            </label>
+                                            {{ form.fecha_nacimiento }}
+                                            {% if form.fecha_nacimiento.errors %}
+                                                <div class="text-danger mt-1">{{ form.fecha_nacimiento.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    {# Subsección: Información de Contacto #}
+                                    {# Email y teléfono de contacto #}
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-envelope me-2 text-primary"></i>
+                                                {{ form.email.label }} *
+                                            </label>
+                                            {{ form.email }}
+                                            {% if form.email.errors %}
+                                                <div class="text-danger mt-1">{{ form.email.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="{{ form.telefono.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-phone me-2 text-primary"></i>
+                                                {{ form.telefono.label }}
+                                            </label>
+                                            {{ form.telefono }}
+                                            {% if form.telefono.errors %}
+                                                <div class="text-danger mt-1">{{ form.telefono.errors }}</div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    {# Subsección: Dirección #}
+                                    {# Dirección completa del usuario #}
+                                    <div class="mb-0">
+                                        <label for="{{ form.direccion.id_for_label }}" class="form-label fw-bold">
+                                            <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                            {{ form.direccion.label }}
+                                        </label>
+                                        {{ form.direccion }}
+                                        {% if form.direccion.errors %}
+                                            <div class="text-danger mt-1">{{ form.direccion.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# ========== SECCIÓN 4: DATOS DE ACCESO ========== #}
+                            {# Credenciales para acceso al sistema #}
+                            <div class="card mb-4">
+                                <div class="card-header bg-warning text-dark">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-key me-2"></i>
+                                        Datos de Acceso al Sistema
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="{{ form.username.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-user-circle me-2 text-primary"></i>
+                                                {{ form.username.label }} *
+                                            </label>
+                                            {{ form.username }}
+                                            {% if form.username.errors %}
+                                                <div class="text-danger mt-1">{{ form.username.errors }}</div>
+                                            {% endif %}
+                                            <small class="text-muted">Mínimo 4 caracteres, será tu usuario para ingresar</small>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="{{ form.password.id_for_label }}" class="form-label fw-bold">
+                                                <i class="fas fa-lock me-2 text-primary"></i>
+                                                {{ form.password.label }} *
+                                            </label>
+                                            <div class="input-group">
+                                                {{ form.password }}
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                    <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                                                </button>
+                                            </div>
+                                            {% if form.password.errors %}
+                                                <div class="text-danger mt-1">{{ form.password.errors }}</div>
+                                            {% endif %}
+                                            <small class="text-muted">Mínimo 6 caracteres, usa mayúsculas, minúsculas y números</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# ========== TÉRMINOS Y CONDICIONES ========== #}
+                            {# Checkbox obligatorio para aceptar términos #}
+                            <div class="mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terminos" name="terminos" required>
+                                    <label class="form-check-label" for="terminos">
+                                        Acepto los <a href="#" class="text-primary">términos y condiciones</a> y la 
+                                        <a href="#" class="text-primary">política de privacidad</a> de la biblioteca *
+                                    </label>
+                                </div>
+                            </div>
+
+                            {# ========== BOTONES DE ACCIÓN ========== #}
+                            {# Botones para volver o enviar el formulario #}
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'core:home' %}" class="btn btn-outline-secondary btn-lg">
+                                    <i class="fas fa-arrow-left me-2"></i>Volver
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Enviar Pre-registro
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ========== SECCIÓN INFORMATIVA ========== #}
+{# Cards con información sobre el proceso de pre-registro #}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-clock text-primary fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Proceso Rápido</h5>
+                        <p class="text-muted">Tu pre-registro será revisado en un máximo de 24 horas hábiles.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-shield-alt text-success fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Datos Seguros</h5>
+                        <p class="text-muted">Tu información personal está protegida y será utilizada únicamente para fines académicos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-bell text-warning fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Notificaciones</h5>
+                        <p class="text-muted">Recibirás un correo electrónico cuando tu cuenta sea activada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{# ========== JAVASCRIPT ESPECÍFICO ========== #}
+{% block extra_js %}
+<script src="{% static 'js/components/django_data.js' %}"></script>
+<script src="{% static 'js/components/django_messages.js' %}"></script>
+<script src="{% static 'js/pages/pre_registro/form.js' %}"></script>
+{% endblock %}

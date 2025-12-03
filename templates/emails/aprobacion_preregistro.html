@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pre-registro Aprobado</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #1e40af; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f8f9fa; }
+        .credentials { background: white; padding: 15px; border-left: 4px solid #28a745; margin: 15px 0; }
+        .footer { text-align: center; padding: 20px; color: #666; }
+        .btn { background: #1e40af; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 ¡Pre-registro Aprobado!</h1>
+            <p>Biblioteca Universitaria</p>
+        </div>
+        
+        <div class="content">
+            <h2>¡Hola {{ nombre }}!</h2>
+            
+            <p>Nos complace informarte que tu pre-registro ha sido <strong>APROBADO</strong> por nuestro equipo.</p>
+            
+            <div class="credentials">
+                <h3>📋 Tus Datos de Acceso:</h3>
+                <ul>
+                    <li><strong>Usuario:</strong> {{ username }}</li>
+                    <li><strong>Contraseña:</strong> {{ password }}</li>
+                    <li><strong>Tipo de usuario:</strong> {{ tipo_usuario }}</li>
+                    <li><strong>ID de usuario:</strong> {{ id_usuario }}</li>
+                </ul>
+            </div>
+            
+            <p>Ya puedes ingresar al sistema de la biblioteca con estos datos y acceder a todos nuestros servicios.</p>
+            
+            <p><strong>⚠️ Importante:</strong> Guarda estos datos en un lugar seguro y no los compartas con nadie.</p>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="#" class="btn">Ingresar al Sistema</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>¡Bienvenido/a a la Biblioteca Universitaria!</p>
+            <p><small>Si tienes alguna duda, contáctanos a biblioteca@universidad.edu.bo</small></p>
+        </div>
+    </div>
+</body>
+</html>
